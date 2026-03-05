@@ -113,10 +113,10 @@ void process_other_press_action(uint16_t keycode, keyrecord_t *record, dynamic_m
   switch (dm->state) {
     case DM_PRESSED:
 
-      // If the pressed key is a cancel key, remove the modifier and revert the
+      // If the pressed key is a reset key, remove the modifier and revert the
       // state of the dynamic mod.
 
-      if (is_dynamic_mod_cancel_key(keycode)) {
+      if (is_dynamic_mod_reset_key(keycode)) {
          del_mods(dm->modbit);
          dm->state = DM_INACTIVE;
          return;
@@ -132,10 +132,10 @@ void process_other_press_action(uint16_t keycode, keyrecord_t *record, dynamic_m
       if (get_oneshot_mods() & dm->modbit) {
 
         // If the dynamic mod has set a oneshot modifier and the pressed key is
-        // a cancel key, remove the oneshot modifier before the cancel key is
+        // a reset key, remove the oneshot modifier before the reset key is
         // processed itself.
 
-        if (is_dynamic_mod_cancel_key(keycode))
+        if (is_dynamic_mod_reset_key(keycode))
           del_oneshot_mods(dm->modbit);
       } else {
 
@@ -175,9 +175,9 @@ __attribute__((weak)) bool is_dynamic_mod_key(uint16_t keycode) {
 }
 
 // User defined function that will return true if the given keycode should
-// cancel all current dynamic mod behaviour.
+// reset all current dynamic mod behaviour.
 
-__attribute__((weak)) bool is_dynamic_mod_cancel_key(uint16_t keycode) {
+__attribute__((weak)) bool is_dynamic_mod_reset_key(uint16_t keycode) {
   return keycode == KC_ESC;
 }
 

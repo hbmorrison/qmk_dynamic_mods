@@ -45,10 +45,10 @@ void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_m
 
 bool is_dynamic_mod_key(uint16_t keycode);
 
-// These functions should be overriden by the user to return true if any keys
+// These functions can be overriden by the user to return true if any keys
 // should either reset all active dynamic mod behaviour, or be ignored by the
-// dynamic mod decision making. For example, the Esc key might act as a reset
-// key and some layer key presses might be ignored.
+// dynamic mod decision making. By default, the Esc key acts as a reset
+// key and all layer-tap key presses are ignored.
 
-bool is_dynamic_mod_cancel_key(uint16_t keycode);
+bool is_dynamic_mod_reset_key(uint16_t keycode);
 bool is_dynamic_mod_ignored_key(uint16_t keycode);
