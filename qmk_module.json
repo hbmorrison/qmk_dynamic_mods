@@ -2,5 +2,15 @@
     "module_name": "Dynamic Mods",
     "maintainer": "hbmorrison",
     "license": "Apache-2.0",
-    "url": "https://github.com/hbmorrison/qmk_dynamic_mods.git"
+    "url": "https://github.com/hbmorrison/qmk_dynamic_mods.git",
+    "keycodes": [
+        { "key": "DYNAMIC_MOD_LEFT_SHIFT",    "aliases": ["DM_LSFT"] },
+        { "key": "DYNAMIC_MOD_LEFT_CONTROL",  "aliases": ["DM_LCTL"] },
+        { "key": "DYNAMIC_MOD_LEFT_ALT",      "aliases": ["DM_LALT"] },
+        { "key": "DYNAMIC_MOD_LEFT_GUI",      "aliases": ["DM_LGUI"] },
+        { "key": "DYNAMIC_MOD_RIGHT_SHIFT",   "aliases": ["DM_RSFT"] },
+        { "key": "DYNAMIC_MOD_RIGHT_CONTROL", "aliases": ["DM_RCTL"] },
+        { "key": "DYNAMIC_MOD_RIGHT_ALT",     "aliases": ["DM_RALT"] },
+        { "key": "DYNAMIC_MOD_RIGHT_GUI",     "aliases": ["DM_RGUI"] }
+    ]
 }
