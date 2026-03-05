@@ -51,4 +51,4 @@ bool is_dynamic_mod_key(uint16_t keycode);
 // key and some layer key presses might be ignored.
 
 bool is_dynamic_mod_cancel_key(uint16_t keycode);
-bool is_dynamic_mod_ignored_keycode(uint16_t keycode);
+bool is_dynamic_mod_ignored_key(uint16_t keycode);

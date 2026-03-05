@@ -21,6 +21,7 @@ void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_m
 void process_dynamic_mod_press_action(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
 void process_dynamic_mod_release_action(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
 void process_other_press_action(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
+bool is_dynamic_mod(uint16_t keycode);
 
 // Static records that hold the state of each dynamic mod.
 
@@ -35,7 +36,7 @@ static dynamic_mod dm_rgui = DYNAMIC_MOD(DM_RGUI, MOD_BIT(KC_RGUI));
 
 // Process each dynamic mod in turn.
 
-void process_record_dynamic_mods(uint16_t keycode, keyrecord_t *record) {
+bool process_record_dynamic_mods(uint16_t keycode, keyrecord_t *record) {
   process_single_dynamic_mod(keycode, record, &dm_lctl);
   process_single_dynamic_mod(keycode, record, &dm_lalt);
   process_single_dynamic_mod(keycode, record, &dm_lgui);
@@ -44,6 +45,7 @@ void process_record_dynamic_mods(uint16_t keycode, keyrecord_t *record) {
   process_single_dynamic_mod(keycode, record, &dm_ralt);
   process_single_dynamic_mod(keycode, record, &dm_rgui);
   process_single_dynamic_mod(keycode, record, &dm_rsft);
+  return true;
 }
 
 void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm) {
