@@ -17,11 +17,10 @@
 
 // Declare internal functions.
 
-void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
-void process_dynamic_mod_press_action(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
-void process_dynamic_mod_release_action(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
-void process_other_press_action(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
-bool is_dynamic_mod(uint16_t keycode);
+void process_dynamic_mod_press_action(uint16_t, keyrecord_t *, dynamic_mod *);
+void process_dynamic_mod_release_action(uint16_t, keyrecord_t *, dynamic_mod *);
+void process_other_press_action(uint16_t, keyrecord_t *, dynamic_mod *);
+bool is_dynamic_mod(uint16_t);
 
 // Static records that hold the state of each dynamic mod.
 
@@ -37,18 +36,18 @@ static dynamic_mod dm_rgui = DYNAMIC_MOD(DM_RGUI, MOD_BIT(KC_RGUI));
 // Process each dynamic mod in turn.
 
 bool process_record_dynamic_mods(uint16_t keycode, keyrecord_t *record) {
-  process_single_dynamic_mod(keycode, record, &dm_lctl);
-  process_single_dynamic_mod(keycode, record, &dm_lalt);
-  process_single_dynamic_mod(keycode, record, &dm_lgui);
-  process_single_dynamic_mod(keycode, record, &dm_lsft);
-  process_single_dynamic_mod(keycode, record, &dm_rctl);
-  process_single_dynamic_mod(keycode, record, &dm_ralt);
-  process_single_dynamic_mod(keycode, record, &dm_rgui);
-  process_single_dynamic_mod(keycode, record, &dm_rsft);
+  if (! process_single_dynamic_mod(keycode, record, &dm_lctl)) return false;
+  if (! process_single_dynamic_mod(keycode, record, &dm_lalt)) return false;
+  if (! process_single_dynamic_mod(keycode, record, &dm_lgui)) return false;
+  if (! process_single_dynamic_mod(keycode, record, &dm_lsft)) return false;
+  if (! process_single_dynamic_mod(keycode, record, &dm_rctl)) return false;
+  if (! process_single_dynamic_mod(keycode, record, &dm_ralt)) return false;
+  if (! process_single_dynamic_mod(keycode, record, &dm_rgui)) return false;
+  if (! process_single_dynamic_mod(keycode, record, &dm_rsft)) return false;
   return true;
 }
 
-void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm) {
+bool process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm) {
 
   // Check whether the current key action is associated with any dynamic mod.
 
@@ -61,6 +60,7 @@ void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_m
         process_dynamic_mod_press_action(keycode, record, dm);
       else
         process_dynamic_mod_release_action(keycode, record, dm);
+      return false;
     }
   } else {
 
@@ -69,6 +69,7 @@ void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_m
     if (record->event.pressed)
       process_other_press_action(keycode, record, dm);
   }
+  return true;
 }
 
 // Act on the dynamic mod key being pressed.

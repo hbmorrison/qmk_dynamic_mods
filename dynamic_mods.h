@@ -38,17 +38,17 @@ typedef struct {
 // Can be used in process_record_user() to process any additional, user defined
 // dynamic mods.
 
-void process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_mod *dm);
+bool process_single_dynamic_mod(uint16_t, keyrecord_t *, dynamic_mod *);
 
 // Can be overriden in keycode.c to flag any additional, user defined dynamic
 // mods.
 
-bool is_dynamic_mod_key(uint16_t keycode);
+bool is_dynamic_mod_key(uint16_t);
 
 // These functions can be overriden by the user to return true if any keys
 // should either reset all active dynamic mod behaviour, or be ignored by the
 // dynamic mod decision making. By default, the Esc key acts as a reset
 // key and all layer-tap key presses are ignored.
 
-bool is_dynamic_mod_reset_key(uint16_t keycode);
-bool is_dynamic_mod_ignored_key(uint16_t keycode);
+bool is_dynamic_mod_reset_key(uint16_t);
+bool is_dynamic_mod_ignored_key(uint16_t);
