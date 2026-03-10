@@ -53,6 +53,10 @@ bool process_single_dynamic_mod(uint16_t keycode, keyrecord_t *record, dynamic_m
 
   if (is_dynamic_mod(keycode)) {
 
+    // The key press on the dynamic layer should cancel any oneshot layer.
+
+    clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
+
     // Process the key action on this dynamic mod key.
 
     if (keycode == dm->keycode) {
